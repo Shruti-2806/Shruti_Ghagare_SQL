@@ -35,7 +35,6 @@ INSERT INTO Member VALUES (105, 'Girish Rao', 'Bangalore',TO_DATE('10-JUL-2005',
 
 select * from Member;
 
-
 INSERT INTO Books VALUES (2001, 'SQL Basics', 'Loni', 550, 'Database');
 INSERT INTO Books VALUES (2002, 'Advanced SQL', 'Loni', 650, 'Database');
 INSERT INTO Books VALUES (2003, 'Data Science 101', 'Mehta', 700, 'Science');
@@ -45,7 +44,6 @@ INSERT INTO Books VALUES (2006, 'Oracle RDBMS', 'Loni', 800, 'RDBMS');
 INSERT INTO Books VALUES (2007, 'C Programming', 'Dennis Ritchie', 500, 'Science');
 
 select * from Books;
-
 
 INSERT INTO Issue VALUES (7001, 2001, 101, TO_DATE('10-JUL-2006','DD-MON-YYYY'), TO_DATE('25-JUL-2006','DD-MON-YYYY'));
 INSERT INTO Issue VALUES (7002, 2002, 101, TO_DATE('15-JUL-2006','DD-MON-YYYY'), NULL);
