@@ -9,7 +9,6 @@ CREATE TABLE Member (
     Penalty_Amount   NUMBER(7,2)
 );
 
-
 CREATE TABLE Books (
     Book_No      NUMBER(6) PRIMARY KEY,
     Book_Name    VARCHAR2(30),
@@ -27,3 +26,33 @@ CREATE TABLE Issue (
     FOREIGN KEY (Book_No) REFERENCES Books(Book_No),
     FOREIGN KEY (Member_Id) REFERENCES Member(Member_Id)
 );
+
+INSERT INTO Member VALUES (101, 'Ravi Kumar', 'Mumbai',   TO_DATE('15-JAN-2006','DD-MON-YYYY'), 'Annual', 500, 5, 100.50);
+INSERT INTO Member VALUES (102, 'Geeta Singh', 'Delhi',   TO_DATE('12-MAR-2006','DD-MON-YYYY'), 'Lifetime', 2000, 10, 50.00);
+INSERT INTO Member VALUES (103, 'Amit Sharma','Pune',    TO_DATE('05-MAY-2007','DD-MON-YYYY'), 'Half Yearly', 300, 3, 0.00);
+INSERT INTO Member VALUES (104, 'Rohan Iyer', 'Chennai', TO_DATE('20-DEC-2006','DD-MON-YYYY'), 'Quarterly', 150, 2, 20.00);
+INSERT INTO Member VALUES (105, 'Girish Rao', 'Bangalore',TO_DATE('10-JUL-2005','DD-MON-YYYY'),'Annual', 500, 5, 0.00);
+
+select * from Member;
+
+
+INSERT INTO Books VALUES (2001, 'SQL Basics', 'Loni', 550, 'Database');
+INSERT INTO Books VALUES (2002, 'Advanced SQL', 'Loni', 650, 'Database');
+INSERT INTO Books VALUES (2003, 'Data Science 101', 'Mehta', 700, 'Science');
+INSERT INTO Books VALUES (2004, 'Fictional World', 'R.K. Narayan', 400, 'Fiction');
+INSERT INTO Books VALUES (2005, 'Management Guru', 'Peter Drucker', 750, 'Management');
+INSERT INTO Books VALUES (2006, 'Oracle RDBMS', 'Loni', 800, 'RDBMS');
+INSERT INTO Books VALUES (2007, 'C Programming', 'Dennis Ritchie', 500, 'Science');
+
+select * from Books;
+
+
+INSERT INTO Issue VALUES (7001, 2001, 101, TO_DATE('10-JUL-2006','DD-MON-YYYY'), TO_DATE('25-JUL-2006','DD-MON-YYYY'));
+INSERT INTO Issue VALUES (7002, 2002, 101, TO_DATE('15-JUL-2006','DD-MON-YYYY'), NULL);
+INSERT INTO Issue VALUES (7003, 2003, 102, TO_DATE('01-AUG-2006','DD-MON-YYYY'), TO_DATE('10-SEP-2006','DD-MON-YYYY'));
+INSERT INTO Issue VALUES (7004, 2004, 103, TO_DATE('05-JAN-2007','DD-MON-YYYY'), NULL);
+INSERT INTO Issue VALUES (7005, 2005, 104, TO_DATE('20-DEC-2006','DD-MON-YYYY'), NULL);
+INSERT INTO Issue VALUES (7006, 2006, 105, TO_DATE('02-NOV-2006','DD-MON-YYYY'), TO_DATE('05-DEC-2006','DD-MON-YYYY'));
+INSERT INTO Issue VALUES (7007, 2007, 101, TO_DATE('10-SEP-2006','DD-MON-YYYY'), TO_DATE('15-OCT-2006','DD-MON-YYYY'));5
+
+select * from Issue;
