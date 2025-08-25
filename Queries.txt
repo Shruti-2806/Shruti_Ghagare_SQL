@@ -54,3 +54,97 @@ INSERT INTO Issue VALUES (7006, 2006, 105, TO_DATE('02-NOV-2006','DD-MON-YYYY'),
 INSERT INTO Issue VALUES (7007, 2007, 101, TO_DATE('10-SEP-2006','DD-MON-YYYY'), TO_DATE('15-OCT-2006','DD-MON-YYYY'));5
 
 select * from Issue;
+
+-- List all the books that are written by Author Loni and has price less then 600.
+select * from books where author_name='Loni' and cost<600;
+
+-- List the Issue details for the books that are not returned yet.
+select * from issue where BOOK_NO in (select Book_No from issue where Return_Date is null)
+
+-- Update all the blank return_date with 31-Dec-06 excluding 7005 and 7006.
+Update issue set return_date = TO_DATE('31-DEC-2006','DD-MON-YYYY') WHERE Return_Date IS NULL AND Lib_Issue_Id!=7005 AND Lib_Issue_Id!=7006;
+
+-- List all the Issue details that have books issued for more then 30 days.
+SELECT * FROM ISSUE WHERE Return_Date-Issue_Date>30;
+
+-- List all the books that have price in range of 500 to 750 and has category as Database.
+SELECT * FROM BOOKS WHERE COST BETWEEN 500 AND 750 AND Category='Database'
+
+-- List all the books that belong to any one of the following categories Science, Database, Fiction, Management.
+SELECT * FROM BOOKS WHERE CATEGORY IN ('Science','Fiction','Management')
+
+-- List all the members in the descending order of Penalty due on them.
+SELECT * FROM Member order by Penalty_Amount desc;
+
+-- List all the books in ascending order of category and descending order of price.
+select * from books order by category asc , cost desc;
+
+-- List all the books that contain word SQL in the name of the book.
+select * from books where book_name LIKE '%SQL%';
+
+-- List all the members whose name starts with R or G and contains letter I in it.
+SELECT * FROM Member WHERE (lower(Member_Name) LIKE 'g%' OR lower(Member_Name) LIKE 'r%') AND lower(Member_Name) LIKE '%i%';
+
+-- List the entire book name in Init cap and author in upper case in the descending order of the book name.
+SELECT INITCAP(Book_Name) as book_name_formatted ,upper(author_name) FROM BOOKS order by book_name desc;
+
+-- List the Issue Details for all the books issue by member 101  
+-- with Issue_date and Return Date in following format. ‘Monday, 
+-- July, 10, 2006’.
+SELECT TO_CHAR(ISSUE_DATE, 'Day, Month, DD, YYYY') formatted_issue_date,TO_CHAR(RETURN_DATE, 'Day, Month, DD, YYYY') AS formatted_return_date from issue where Member_Id=101 ;
+
+-- 13)	List the data in the book table with category data displayed as  
+-- 	D for Database, S for Science, R for RDBMS and O for all the  
+-- others.
+
+select
+    case 
+    category
+     when 'Database' then 'D'
+     when 'Science' then 'S' 
+     when 'RDBMS' then 'R'
+     else 'O'
+    end as category
+from books;
+
+SELECT * FROM MEMBER;
+-- 14)	List all the members that became the member in the year 2006.
+SELECT * FROM MEMBER WHERE TO_CHAR(ACC_OPEN_DATE,'YYYY')=2006;
+SELECT * FROM MEMBER WHERE EXTRACT(YEAR FROM ACC_OPEN_DATE)=2006;
+
+-- 15)	List the Lib_Issue_Id, Issue_Date, Return_Date and No of days 
+-- Book was issued.
+
+SELECT LIB_ISSUE_ID,ISSUE_DATE,RETURN_DATE,ABS(RETURN_DATE-ISSUE_DATE) AS NO_OF_DAYS FROM ISSUE; 
+
+-- 16)	Find the details of the member of the Library in the order of their 
+-- joining the library.
+
+SELECT * FROM MEMBER ORDER BY ACC_OPEN_DATE;
+select * from member;
+-- 17)	Display the count of total no of books issued to Member 101.
+select count(book_no) from issue where Member_Id=101;
+
+-- 18)	Display the total penalty due for all the members.
+SELECT SUM(Penalty_Amount) from member;
+
+-- 19)	Display the total no of members 
+select count(Member_Id) from member;
+
+-- 20)	Display the total no of books issued 
+select count(book_no) from Books;
+
+-- 21)	Display the average membership fees paid by all the members
+select avg(Fees_Paid) from Member;
+
+-- 22)	Display no of months between issue date and return date for all issue
+SELECT (EXTRACT(month from return_date)-EXTRACT(month from Issue_date) ) AS NO_OF_MONTHS from issue;
+
+-- 23)	Display the length of member’s name
+SELECT LENGTH(Member_Name) from member;
+
+-- 24)	Display the first 5 characters of  membership_type for all members
+SELECT substr(membership_type,1,5) from member;
+
+-- 25)	Display the last day of the month of issue date 
+SELECT lib_issue_id, issue_date, LAST_DAY(issue_date) FROM ISSUE;
