@@ -1,0 +1,29 @@
+CREATE TABLE Member (
+    Member_Id        NUMBER(5) PRIMARY KEY,
+    Member_Name      VARCHAR2(30),
+    Member_Address   VARCHAR2(50),
+    Acc_Open_Date    DATE,
+    Membership_Type  VARCHAR2(20),
+    Fees_Paid        NUMBER(4),
+    Max_Books_Allowed NUMBER(2),
+    Penalty_Amount   NUMBER(7,2)
+);
+
+
+CREATE TABLE Books (
+    Book_No      NUMBER(6) PRIMARY KEY,
+    Book_Name    VARCHAR2(30),
+    Author_Name  VARCHAR2(30),
+    Cost         NUMBER(7,2),
+    Category     CHAR(10)
+);
+
+CREATE TABLE Issue (
+    Lib_Issue_Id NUMBER(10) PRIMARY KEY,
+    Book_No      NUMBER(6),
+    Member_Id    NUMBER(5),
+    Issue_Date   DATE,
+    Return_Date  DATE,
+    FOREIGN KEY (Book_No) REFERENCES Books(Book_No),
+    FOREIGN KEY (Member_Id) REFERENCES Member(Member_Id)
+);
